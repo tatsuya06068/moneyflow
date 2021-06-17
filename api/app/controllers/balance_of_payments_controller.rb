@@ -1,5 +1,6 @@
 class BalanceOfPaymentsController < ApplicationController
 
+    include Secured
     def index
         @balanceOfPayments = BalanceOfPayment.find(params[:userid])
     
@@ -7,7 +8,7 @@ class BalanceOfPaymentsController < ApplicationController
     end
 
     def create 
-        @balanceOfPayments = BalanceOfPayment.new(balanceofpayment_params)
+        @balanceOfPayments = BalanceOfPayment.new(balanceofpayment_params.merge(user_id: @current_user_id))
     
         if @balanceOfPayments.save
             render json: @balanceOfPayments, status: :created, location: @balanceOfPayments
@@ -19,6 +20,6 @@ class BalanceOfPaymentsController < ApplicationController
     
     private
         def balanceofpayment_params
-            params.require(:balanceOfPayment).permit(:title, :date, :totalmoney, :userid)
+            params.require(:balanceOfPayment).permit(:title, :date, :totalmoney, :user_id)
         end
 end
