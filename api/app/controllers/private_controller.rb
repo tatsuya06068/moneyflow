@@ -1,7 +1,7 @@
 class PrivateController < ActionController::API
     include Secured
     def private
-     render json: { message: @current_user_id}
+     render json: { message: @auth_user_id}
     end
 
     def private_scoped 

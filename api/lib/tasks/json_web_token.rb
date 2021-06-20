@@ -6,14 +6,13 @@ require 'uri'
 
 class JsonWebToken
   def self.verify(token)
-    decode = JWT.decode(token, nil,
+    JWT.decode(token, nil,
                true, # Verify the signature of this token
                algorithms: 'RS256',
                iss: 'https://fuji6683.jp.auth0.com/',
                verify_iss: true,
                aud: Rails.application.secrets.auth0_api_audience,
-               verify_aud: true)
-    decode do |header|
+               verify_aud: true) do |header|
      jwks_hash[header['kid']] 
     end
   end
