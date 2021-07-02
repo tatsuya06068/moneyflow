@@ -13,12 +13,12 @@ function LoginAxios() {
       () => {
         const f = async() => {
         const accessToken = await getAccessTokenSilently();
+        console.log (accessToken)
         axios.get("http://localhost:3000/api/private", { headers: {
             Authorization: "Bearer " + accessToken
             },
             })
         .then((res) => {
-          alert(res)
           console.log(res)
           return res;
         })
