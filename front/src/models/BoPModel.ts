@@ -4,8 +4,8 @@ export interface BoPState{
 } 
 
 export interface BoPItem{
-    id?: number;
-    title?: string;
-    date?: Date;
-    totalmoney?: number;
+    id: number;
+    title: string;
+    date: Date;
+    totalmoney: number;
 }

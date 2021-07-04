@@ -2,8 +2,7 @@ class BalanceOfPaymentsController < ApplicationController
 
     include Secured
     def index
-        @balanceOfPayments = BalanceOfPayment.find(params[:userid])
-    
+        @balanceOfPayments = BalanceOfPayment.find(@auth_user_id) 
         render json: @balanceOfPayments
     end
 

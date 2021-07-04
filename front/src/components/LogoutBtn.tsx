@@ -2,18 +2,19 @@ import React from "react"
 import { useAuth0 } from "@auth0/auth0-react"
 import '../layouts/App.sass'
 import '../common/LoginAxios'
-import { BoPList, responsBoP } from '../stores/slices/BoPSlice'
+import { ResponseBoPList} from '../stores/slices/BoPSlice'
 import {useDispatch} from 'react-redux'
+import { isConditionalExpression } from "typescript"
 
 function LogoutButton(props: any) {
   const dispatch = useDispatch();
   const { isAuthenticated, logout, getAccessTokenSilently } = useAuth0();
   const {user} = useAuth0()
 
-    async function getToken() {
-      const response = await getAccessTokenSilently()
+  async function getToken() {
+    const response = await getAccessTokenSilently()
       .then((accessToken) => {
-        dispatch(BoPList({accessToken}))
+      dispatch(ResponseBoPList({accessToken}))
       })
     } 
 
@@ -30,8 +31,7 @@ function LogoutButton(props: any) {
       </button>
       {console.log(user)}
       {user?.name}
-      <button onClick={() => {
-        //const token = getToken();
+      <button onClick={() => { 
         getToken()
       }}>api</button>
     </div>
