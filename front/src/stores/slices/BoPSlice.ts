@@ -19,13 +19,14 @@ const GetBoPList = async(accessToken: string)=> {
 }
 //BoP登録
 const InsBoP = async(accessToken: string, title: string , date: string, totalMoney: string) => {
-    return axios.post("http://localhost:3000/balance_of_payments", { params:{ 
-         title: title,
-         date: date,
-         totalmoney: totalMoney
-}
-        },
-        {
+        return await axios.post("http://localhost:3000/balance_of_payments", {  
+                balanceofpayment: {
+                    title: title,
+                    date: date,
+                    totalmoney: totalMoney
+                }
+            },
+         {
             headers: {
                 Authorization: "Bearer " + accessToken
         },
@@ -35,12 +36,13 @@ const InsBoP = async(accessToken: string, title: string , date: string, totalMon
 export const ResponseBoPIns = createAsyncThunk<bopListType, {accessToken: string, title: string, date: string, totalMoney: string} > (
     'balanceOfPayment/boPIns',
     async ({accessToken, title, date, totalMoney},): Promise<bopListType> => {
-      return InsBoP(accessToken, title, date, totalMoney)
+      return await InsBoP(accessToken, title, date, totalMoney)
       .then((res)=>{
+          console.log(res)
           return res
       })
       .catch((err) => {
-          console.log(err)
+          console.log(Promise.resolve(err));
           return err;
       });
     } 

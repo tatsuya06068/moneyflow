@@ -2,23 +2,23 @@ class BalanceOfPaymentsController < ApplicationController
 
     include Secured
     def index
-        @balanceOfPayments = BalanceOfPayment.find(@auth_user_id) 
+        @balanceOfPayments = BalanceOfPayment.where(userid: @auth_user_id) 
         render json: @balanceOfPayments
     end
 
     def create 
-        @balanceOfPayments = BalanceOfPayment.new(balanceofpayment_params.merge(user_id: @current_user_id))
-    
+        #user_id = @auth_user_id
+        @balanceOfPayments = BalanceOfPayment.new(balanceofpayment_params.merge(userid: @auth_user_id))
         if @balanceOfPayments.save
-            render json: @balanceOfPayments, status: :created, location: @balanceOfPayments
-          else
+            render json: @balanceOfPayments, status: :created
+        else
             render json: @balanceOfPayments.errors, status: :unprocessable_entity
-          end
+        end
     end
 
     
     private
         def balanceofpayment_params
-            params.require(:balanceOfPayment).permit(:title, :date, :totalmoney, :user_id)
+            params.require(:balanceofpayment).permit(:title, :date, :totalmoney, :userid)
         end
 end
