@@ -1,11 +1,10 @@
 
-export interface BoPState{
-    BoPItems: Array<BoPItem>
-} 
+export type BoPState = BoPItem[];
+ 
 
-export interface BoPItem{
+export type BoPItem = {
     id: number;
     title: string;
     date: Date;
     totalmoney: number;
-}
+};

@@ -1,25 +1,27 @@
 import { createSlice, createAsyncThunk, createEntityAdapter, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { BoPState } from '../../models/BoPModel'
+import {RootState} from '../../rootReducer'
+import { BoPItem, BoPState } from '../../models/BoPModel'
 
 
-    type bopListType = BoPState
+export type bopListType = {bops: BoPState}
 
-    const initialState: bopListType = {
-        BoPItems: [],
-    };
+const bopsAdapter = createEntityAdapter<BoPItem>({
+    selectId: (BoPItem) => BoPItem.id
+})
 
+const URL = 'http://localhost:3000'
 //BoPList取得
 const GetBoPList = async(accessToken: string)=> {
     console.log(accessToken);
-    return axios.get("http://localhost:3000/balance_of_payments", { headers: {
+    return axios.get<BoPState>( URL + '/balance_of_payments', { headers: {
         Authorization: "Bearer " + accessToken
         }, 
     })
 }
 //BoP登録
 const InsBoP = async(accessToken: string, title: string , date: string, totalMoney: string) => {
-        return await axios.post("http://localhost:3000/balance_of_payments", {  
+        return axios.post<BoPItem>( URL + '/balance_of_payments', {  
                 balanceofpayment: {
                     title: title,
                     date: date,
@@ -33,56 +35,52 @@ const InsBoP = async(accessToken: string, title: string , date: string, totalMon
     })
 } 
 
-export const ResponseBoPIns = createAsyncThunk<bopListType, {accessToken: string, title: string, date: string, totalMoney: string} > (
+//追加
+export const ResponseBoPIns = createAsyncThunk<BoPItem, {accessToken: string, title: string, date: string, totalMoney: string} > (
     'balanceOfPayment/boPIns',
-    async ({accessToken, title, date, totalMoney},): Promise<bopListType> => {
-      return await InsBoP(accessToken, title, date, totalMoney)
-      .then((res)=>{
-          console.log(res)
-          return res
-      })
+    async ({accessToken, title, date, totalMoney}, thunkApi) => {
+      const response = await InsBoP(accessToken, title, date, totalMoney)
       .catch((err) => {
+          thunkApi.rejectWithValue(err);
           console.log(Promise.resolve(err));
-          return err;
-      });
+          throw err;
+      })
+      return response.data;
     } 
 );
 
 //BoP一覧取得   
-export const ResponseBoPList = createAsyncThunk<bopListType, {accessToken: string} >(
+export const ResponseBoPList = createAsyncThunk<BoPState, {accessToken: string} >(
     'balanceOfPayment/boPList',
-    async ({accessToken},): Promise<bopListType>=> {
-        return GetBoPList(accessToken)
-         .then((res) => {
-             console.log(res)
-            return {balanceOfPayment: res}
-         })
+    async ({accessToken}, thunkApi)=> {
+        const response = await GetBoPList(accessToken)
          .catch((err) => {
+            thunkApi.rejectWithValue(err); 
             console.log(Promise.resolve(err));
-            return err;
-         });
+            throw err;
+         })
+         return response.data
     }
 );
 
 export const BoPSlice = createSlice({
     name: 'balanceOfPayment',
-    initialState,
+    initialState: bopsAdapter.getInitialState({
+        loading: 'idle'
+    }),
     reducers: {},
     extraReducers: (builder) => {
-        builder
+        builder 
             .addCase(ResponseBoPList.fulfilled, (state, action) => {
-                state.BoPItems = action.payload.BoPItems
+                bopsAdapter.setAll(state, action.payload);
             })
             .addCase(ResponseBoPIns.fulfilled, (state, action) =>{
-                state.BoPItems = action.payload.BoPItems
+                bopsAdapter.addOne(state, action.payload);
             })
         
     }
     
 });
 
-export const {
-    
-} = BoPSlice.actions
-
-export default BoPSlice
+export default BoPSlice.reducer
+export const selectBoPList = bopsAdapter.getSelectors<RootState>((state) => state.BoPList)

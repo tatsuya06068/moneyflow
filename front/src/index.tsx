@@ -18,7 +18,7 @@ ReactDOM.render(
         scope="read:messages"
       >
         <App />
-      </Auth0Provider>,
+      </Auth0Provider>
     </Provider>,
   document.querySelector("#root")
 );

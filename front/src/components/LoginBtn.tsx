@@ -1,7 +1,6 @@
 import React from "react"
 import { useAuth0 } from "@auth0/auth0-react"
 import '../layouts/App.sass'
-//import LoginAxios from "../common/LoginAxios";
 import { Button } from '@material-ui/core' 
 
 function LoginButton() {
