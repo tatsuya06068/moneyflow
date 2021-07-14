@@ -16,6 +16,23 @@ class BalanceOfPaymentsController < ApplicationController
         end
     end
 
+    def update
+        balanceofpayment = BalanceOfPayment.find[params[:id]]
+        balanceofpayment.update_arributes(balanceofpayment: params[:balanceofpayment])
+        render json: balanceofpayment
+    end
+
+    def destroy
+        balanceofpayment = BalanceOfPayment.find[params[:id]]
+        if balanceofpayment.destroy
+            head :no_content, status: :ok
+        else
+            render json: balanceofpayment.errors, statud: :unprocessable_entity
+        end
+    end
+
+
+
     
     private
         def balanceofpayment_params

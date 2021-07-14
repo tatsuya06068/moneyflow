@@ -4,7 +4,7 @@ import AddItem from '../AddItem'
 import BoPItem from '../BoPItem'
 import {useSelector, useDispatch} from 'react-redux'
 import { selectBoPList } from '../../stores/slices/BoPSlice'
-import GetBoPList from '../../common/EffectGetBoPList'
+import GetBoPList from '../../common/GetBoPList'
 
 const MoneyFlowList : React.FC = () => {
     GetBoPList();

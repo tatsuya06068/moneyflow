@@ -1,0 +1,4 @@
+front/node_modules/*
+.vscode/
+api/tmp/
+front/node_modules/.cache/.eslintcache
