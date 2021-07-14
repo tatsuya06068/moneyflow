@@ -7,10 +7,11 @@ import List from './components/intensive/MoneyFlowList'
 import { ProtectedRoute } from "./routers/ProtectedRoute"
 import ReactDOM from "react-dom"
 import { useAuth0 } from "@auth0/auth0-react"
+
 const App: React.FC = () => {
   const { isLoading } = useAuth0();
   if (isLoading) {
-    return <p></p>;
+    return <p>Now lodinig</p>;
   }
   return (
     <div className="App">

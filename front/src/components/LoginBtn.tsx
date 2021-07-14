@@ -1,13 +1,13 @@
 import React from "react"
 import { useAuth0 } from "@auth0/auth0-react"
 import '../layouts/App.sass'
-import LoginAxios from "../common/LoginAxios";
+import { Button } from '@material-ui/core' 
 
 function LoginButton() {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
-  if (isAuthenticated) LoginAxios();
+  //if (isAuthenticated) LoginAxios();
   return !isAuthenticated ? (
-    <button onClick={loginWithRedirect}>Log in</button>
+    <Button variant="contained" color="primary" onClick={loginWithRedirect}>Log in</Button>
 
   ) : null;
 }

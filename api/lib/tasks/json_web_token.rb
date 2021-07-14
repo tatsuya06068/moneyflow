@@ -13,7 +13,7 @@ class JsonWebToken
                verify_iss: true,
                aud: Rails.application.secrets.auth0_api_audience,
                verify_aud: true) do |header|
-      jwks_hash[header['kid']]
+     jwks_hash[header['kid']] 
     end
   end
 
