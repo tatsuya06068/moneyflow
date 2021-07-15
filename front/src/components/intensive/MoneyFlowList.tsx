@@ -7,7 +7,9 @@ import { selectBoPList } from '../../stores/slices/BoPSlice'
 import GetBoPList from '../../common/GetBoPList'
 
 const MoneyFlowList : React.FC = () => {
+    
     GetBoPList();
+
     const items = useSelector(selectBoPList.selectAll)
     return(
         <div>

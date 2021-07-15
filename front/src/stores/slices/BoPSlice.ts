@@ -38,16 +38,16 @@ const InsBoP = async(accessToken: string, title: string , date: string, totalMon
 
 //削除
 const DelBoP = async(accessToken: string , id: number) => {
-    return axios.delete<BoPItem>(URL + 'balance_of_payments', {
+    return axios.delete<BoPItem>(URL + '/balance_of_payments/' + id, {
         headers: {
             Authorization: "Bearer " + accessToken
         },
-        data: {
+       data: {
             id: id
-        }
+       },
+
     })
 }
-
 
 //追加
 export const ResponseBoPIns = createAsyncThunk<BoPItem, {accessToken: string, title: string, date: string, totalMoney: string} > (
@@ -78,16 +78,17 @@ export const ResponseBoPList = createAsyncThunk<BoPState, {accessToken: string} 
 );
 
 //削除
-export const ResponseBoPDelete = createAsyncThunk<BoPItem, {accessToken: string, id: number} >(
+export const ResponseBoPDelete = createAsyncThunk<number,{accessToken: string, id: number} >(
     'balanceOfPayment/boPDelete',
     async ({accessToken, id}, thunkApi) => {
         const response = await DelBoP(accessToken, id)
         .catch((err) => {
             thunkApi.rejectWithValue(err)
+            console.log(Promise.resolve(err))
             throw err;
         });
-        console.log(response.data)
-        return response.data;
+        console.log(response.data.id)
+        return id;
     },
 );
 
@@ -106,7 +107,7 @@ export const BoPSlice = createSlice({
                 bopsAdapter.addOne(state, action.payload);
             })
             .addCase(ResponseBoPDelete.fulfilled, (state, action) => {
-                bopsAdapter.removeOne(state, action.payload.id)
+                bopsAdapter.removeOne(state, action.payload)
             })
         
     }

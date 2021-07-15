@@ -23,7 +23,7 @@ class BalanceOfPaymentsController < ApplicationController
     end
 
     def destroy
-        balanceofpayment = BalanceOfPayment.find[params[:id]]
+        balanceofpayment = BalanceOfPayment.find(params[:id])
         if balanceofpayment.destroy
             head :no_content, status: :ok
         else

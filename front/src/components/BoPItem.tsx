@@ -3,28 +3,27 @@ import {BoPItem as BoPModel} from '../models/BoPModel'
 import { useDispatch, useSelector} from 'react-redux'
 import { selectBoPList, ResponseBoPDelete } from '../stores/slices/BoPSlice'
 import {useAuth0} from '@auth0/auth0-react'
+import { access } from 'fs'
 
 type Props = {
     bop: BoPModel
 }
 
-const Token = (): string => {
-    const {getAccessTokenSilently} = useAuth0();
-    async function getToken(){
-        await getAccessTokenSilently()      
-    }
-     const token = getToken();
-     return String(token);
-}
-
-const DelBoP = (id: number) => {
-    const dispatch = useDispatch()
-    const accessToken = Token();
-    dispatch(ResponseBoPDelete({accessToken, id}))
-}
-
 const BoPItem : React.FC<Props> = ({ bop }) => {
-    
+    const dispatch = useDispatch()
+    const {getAccessTokenSilently} = useAuth0(); 
+
+
+    const DelBoP = (id: number) => {
+        async function bopDel(id: number){
+           await getAccessTokenSilently()
+           .then((accessToken) => {             
+                dispatch(ResponseBoPDelete({accessToken, id}))
+           })        
+        }
+        bopDel(id);
+    }
+
    return( 
         <li>
             <label>
