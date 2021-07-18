@@ -36,11 +36,28 @@ const InsBoP = async(accessToken: string, title: string , date: string, totalMon
     })
 } 
 
+//BoP更新
+const UpdateBoP = async(accessToken: string, id: number, title: string , date: string, totalMoney: string) => {
+    return axios.put<BoPItem>(URL + '/balance_of_payments', {
+            balanceofpayment: {
+                id: id,
+                title: title,
+                date: date,
+                totalmoney: totalMoney
+                }
+            },
+         {
+            headers: {
+                Authorization: "Bearer " + accessToken
+        },
+    })
+}
+
 //削除
 const DelBoP = async(accessToken: string , id: number) => {
     return axios.delete<BoPItem>(URL + '/balance_of_payments/' + id, {
         headers: {
-            Authorization: "Bearer " + accessToken
+           Authorization: "Bearer " + accessToken
         },
        data: {
             id: id
@@ -68,6 +85,20 @@ export const ResponseBoPList = createAsyncThunk<BoPState, {accessToken: string} 
     'balanceOfPayment/boPList',
     async ({accessToken}, thunkApi)=> {
         const response = await GetBoPList(accessToken)
+         .catch((err) => {
+            thunkApi.rejectWithValue(err); 
+            console.log(Promise.resolve(err));
+            throw err;
+         })
+         return response.data
+    }
+);
+
+//BoP更新   
+export const ResponseBoPUpdate = createAsyncThunk<BoPItem, {accessToken: string, id: number, title: string, date: string, totalMoney: string} >(
+    'balanceOfPayment/boPUpdate',
+    async ({accessToken, id, title, date, totalMoney}, thunkApi)=> {
+        const response = await UpdateBoP(accessToken, id, title, date, totalMoney)
          .catch((err) => {
             thunkApi.rejectWithValue(err); 
             console.log(Promise.resolve(err));
@@ -108,6 +139,13 @@ export const BoPSlice = createSlice({
             })
             .addCase(ResponseBoPDelete.fulfilled, (state, action) => {
                 bopsAdapter.removeOne(state, action.payload)
+            })
+            .addCase(ResponseBoPUpdate.fulfilled, (state, action)=> {
+                const {id, ...updateData} = action.payload
+                bopsAdapter.updateOne(state, {
+                    id: id,
+                    changes: { ...updateData},
+                });
             })
         
     }

@@ -5,6 +5,7 @@ import BoPItem from '../BoPItem'
 import {useSelector, useDispatch} from 'react-redux'
 import { selectBoPList } from '../../stores/slices/BoPSlice'
 import GetBoPList from '../../common/GetBoPList'
+import BoPModal from '../BoPModal'
 
 const MoneyFlowList : React.FC = () => {
     
@@ -24,6 +25,7 @@ const MoneyFlowList : React.FC = () => {
     
                 </ul>
             }
+            <BoPModal />
         </div>
     )
 }

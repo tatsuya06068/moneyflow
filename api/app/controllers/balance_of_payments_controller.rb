@@ -17,7 +17,7 @@ class BalanceOfPaymentsController < ApplicationController
     end
 
     def update
-        balanceofpayment = BalanceOfPayment.find[params[:id]]
+        balanceofpayment = BalanceOfPayment.find(params[:id])
         balanceofpayment.update_arributes(balanceofpayment: params[:balanceofpayment])
         render json: balanceofpayment
     end
