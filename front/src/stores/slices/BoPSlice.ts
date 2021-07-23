@@ -37,8 +37,8 @@ const InsBoP = async(accessToken: string, title: string , date: string, totalMon
 } 
 
 //BoP更新
-const UpdateBoP = async(accessToken: string, id: number, title: string , date: string, totalMoney: string) => {
-    return axios.put<BoPItem>(URL + '/balance_of_payments', {
+const UpdateBoP = async(accessToken: string, id: number, title: string , date: string, totalMoney: number) => {
+    return axios.put<BoPItem>(URL + '/balance_of_payments/' + id, {
             balanceofpayment: {
                 id: id,
                 title: title,
@@ -95,7 +95,7 @@ export const ResponseBoPList = createAsyncThunk<BoPState, {accessToken: string} 
 );
 
 //BoP更新   
-export const ResponseBoPUpdate = createAsyncThunk<BoPItem, {accessToken: string, id: number, title: string, date: string, totalMoney: string} >(
+export const ResponseBoPUpdate = createAsyncThunk<BoPItem, {accessToken: string, id: number, title: string, date: string, totalMoney: number} >(
     'balanceOfPayment/boPUpdate',
     async ({accessToken, id, title, date, totalMoney}, thunkApi)=> {
         const response = await UpdateBoP(accessToken, id, title, date, totalMoney)

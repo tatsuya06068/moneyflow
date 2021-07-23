@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React,{useState, createContext} from 'react'
 import '../../layouts/App.sass'
 import AddItem from '../AddItem'
 import BoPItem from '../BoPItem'
@@ -7,8 +7,10 @@ import { selectBoPList } from '../../stores/slices/BoPSlice'
 import GetBoPList from '../../common/GetBoPList'
 import BoPModal from '../BoPModal'
 
+
 const MoneyFlowList : React.FC = () => {
     
+    //BoP一覧取得
     GetBoPList();
 
     const items = useSelector(selectBoPList.selectAll)
@@ -25,7 +27,6 @@ const MoneyFlowList : React.FC = () => {
     
                 </ul>
             }
-            <BoPModal />
         </div>
     )
 }

@@ -4,17 +4,19 @@ import * as Const from '../common/Const'
 
 type Props = {
     show?: boolean;
+    id?: number;
     title?: string;
     date?: Date;
     totalMoney?: number;
 }
 
-const BoPModal: React.FC<Props> = ({show, title, date, totalMoney}) => {
+const BoPModal: React.FC<Props> = ({show, id, title, date, totalMoney}) => {
    if(show){ 
         return ( 
             <div id="overlay">
                 <form id="content">
                     <label>
+                        {id}
                         {Const.TITLE}:
                         <input type="text" name="title" value={title} />
                         {Const.PURCHASE_DATE}
