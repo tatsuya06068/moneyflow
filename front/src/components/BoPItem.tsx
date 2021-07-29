@@ -3,7 +3,7 @@ import {BoPItem as BoPModel} from '../models/BoPModel'
 import { useDispatch, useSelector} from 'react-redux'
 import { selectBoPList, ResponseBoPDelete, ResponseBoPUpdate } from '../stores/slices/BoPSlice'
 import {useAuth0} from '@auth0/auth0-react'
-//import {Button, List, ListItem, ListItemText} from '@material-ui/core'
+import {Button, List, ListItem, ListItemText} from '@material-ui/core'
 
 
 type Props = {
@@ -81,18 +81,17 @@ const BoPItem : React.FC<Props> = ({ bop }) => {
         </> 
     )}else{
         return(
-            <>
-                <li>
-                    <label>
-                        <span>{ bop.title }</span>
-                        <span>{ bop.date }</span>
-                        <span>{ bop.totalmoney }</span>
-                    </label>
-                <button onClick = {() => DelBoP(bop.id)}>削除</button>    
-                <button onClick = {() => ChangeEdit(bop.title, bop.date.toString(), bop.totalmoney)}>編集</button>
-            </li>
+            
+                <ListItem alignItems="flex-start">
+                        <label>
+                            <span>{ bop.title }</span>
+                            <span>{ bop.date }</span>
+                            <span>{ bop.totalmoney }</span>
+                        </label>
+                    <button onClick = {() => DelBoP(bop.id)}>削除</button>    
+                    <button onClick = {() => ChangeEdit(bop.title, bop.date.toString(), bop.totalmoney)}>編集</button>
+                </ListItem>
 
-            </>
         )
     }
 }

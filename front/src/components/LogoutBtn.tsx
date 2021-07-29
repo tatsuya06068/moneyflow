@@ -4,26 +4,25 @@ import '../layouts/App.sass'
 import '../common/LoginAxios'
 import { ResponseBoPList} from '../stores/slices/BoPSlice'
 import {useDispatch} from 'react-redux'
-import { isConditionalExpression } from "typescript"
+import { Button, Grid } from "@material-ui/core"
 
 function LogoutButton(props: any) {
-  const { isAuthenticated, logout, getAccessTokenSilently } = useAuth0();
+  const { isAuthenticated, logout } = useAuth0();
   const {user} = useAuth0()
 
     return isAuthenticated ? (
-    <div>
-      <button
+    <Grid container justify="center">
+      <Button
         variant="outline-primary"
+         style={{width: '56em', height: '3em', textAlign: 'center'}}
         onClick={() => {
           logout({ returnTo: window.location.origin });
         }}
         {...props}
       >
         Log out
-      </button>
-      {console.log(user)}
-      {user?.name}
-    </div>
+      </Button>
+    </Grid>
 
   ) : null;
 }

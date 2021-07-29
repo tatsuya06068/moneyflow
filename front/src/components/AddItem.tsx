@@ -5,6 +5,8 @@ import * as Const from '../common/Const'
 import {ResponseBoPIns} from '../stores/slices/BoPSlice'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useDispatch } from 'react-redux'
+import {TextField, Button, Grid, Accordion, AccordionDetails, AccordionSummary} from '@material-ui/core'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const AddItem: React.FC = () => {
     
@@ -13,6 +15,7 @@ const AddItem: React.FC = () => {
     const [totalMoney, setTotalMoney]= useState("");
     const {getAccessTokenSilently} = useAuth0(); 
     const dispatch = useDispatch();
+    
 
     const handleCahnge = (event: any) => {
         switch (event.target.name){
@@ -31,27 +34,48 @@ const AddItem: React.FC = () => {
         }
     }
 
+    const getToday = () => {
+        const dt = new Date();
+        const y = dt.getFullYear();
+        const m = ('00' + (dt.getMonth()+1)).slice(-2);
+        const d = ('00' + dt.getDate()).slice(-2);
+        return (y + '-' + m + '-' + d);
+    }
+
     const onClickeSubmit = async() =>{
         const accessToken = await getAccessTokenSilently()
         dispatch(ResponseBoPIns({accessToken, title, date, totalMoney}))
     }
 
     return(
-        <div className= 'inner'>
-            <form>
-                <label>
-                    {Const.TITLE}:
-                    <input type="text" name="title" onChange={handleCahnge}/>
-                    {Const.PURCHASE_DATE}
-                    <input type = "date" name="date" onChange={handleCahnge}/>
-                    {Const.TOTALMONEY}
-                    <input type = "text" name="totalMoney" onChange={handleCahnge}/>
-                </label>
-            </form>
-            <button onClick={() => {
+        <>
+            <Accordion>
+                <AccordionSummary 
+                    expandIcon = {<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                    <strong>追加</strong>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <form>
+                    <label>
+                        <TextField type="text" label={Const.TITLE} name="title" onChange={handleCahnge}/>
+                            <TextField  type="date"
+                                name="date" 
+                                label={Const.PURCHASE_DATE}
+                                defaultValue={getToday()}
+                                onChange={handleCahnge}
+                            />
+                            <TextField type = "text" label={Const.TOTALMONEY} name="totalMoney" onChange={handleCahnge}/>
+                    </label>
+                    </form>
+                    <Button onClick={() => {
                         onClickeSubmit()
-                    }}>追加</button>
-        </div> 
+                    }}>追加</Button>
+                </AccordionDetails>
+            </Accordion>
+        </> 
     );
 }
 
