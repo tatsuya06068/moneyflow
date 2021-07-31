@@ -7,7 +7,14 @@ import { BoPItem, BoPState } from '../../models/BoPModel'
 export type bopListType = {bops: BoPState}
 
 const bopsAdapter = createEntityAdapter<BoPItem>({
-    selectId: (BoPItem) => BoPItem.id
+    selectId: (BoPItem) => BoPItem.id,
+     sortComparer: (a, b) => {
+    if (a.id < b.id) {
+      return 1;
+    } else {
+      return -1;
+    }
+  },
 })
 
 const URL = 'http://localhost:3000'
