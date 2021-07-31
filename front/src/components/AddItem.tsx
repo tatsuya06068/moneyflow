@@ -5,7 +5,7 @@ import * as Const from '../common/Const'
 import {ResponseBoPIns} from '../stores/slices/BoPSlice'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useDispatch } from 'react-redux'
-import {TextField, Button, Grid, Accordion, AccordionDetails, AccordionSummary} from '@material-ui/core'
+import {Input, InputLabel, FormControl ,TextField, Button, Grid, Accordion, AccordionDetails, AccordionSummary, AccordionActions, Divider} from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const AddItem: React.FC = () => {
@@ -13,6 +13,9 @@ const AddItem: React.FC = () => {
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const [totalMoney, setTotalMoney]= useState("");
+    const [titleCheck, setTitleCheck] = useState(false);
+    const [dateCheck, setDateCheck] = useState(false);
+    const [totalMoneyCheck, setTotalMoneyCheck] = useState(false);
     const {getAccessTokenSilently} = useAuth0(); 
     const dispatch = useDispatch();
     
@@ -44,37 +47,100 @@ const AddItem: React.FC = () => {
 
     const onClickeSubmit = async() =>{
         const accessToken = await getAccessTokenSilently()
+        if (title.length == 0) {
+            setTitleCheck(true);
+            return
+        }
+        else if(titleCheck){
+            setTitleCheck(false);
+        }
+
+        if (date.length == 0) {
+            setDateCheck(true);
+            return
+        }else if(dateCheck){
+            setDateCheck(false)
+        }
+
+        if (totalMoney.length == 0) {
+            setTotalMoneyCheck(true);
+            return
+        }else if(totalMoneyCheck){
+            setTotalMoneyCheck(false)
+        }
+
         dispatch(ResponseBoPIns({accessToken, title, date, totalMoney}))
     }
 
     return(
         <>
-            <Accordion>
-                <AccordionSummary 
-                    expandIcon = {<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <strong>追加</strong>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <form>
-                    <label>
-                        <TextField type="text" label={Const.TITLE} name="title" onChange={handleCahnge}/>
-                            <TextField  type="date"
-                                name="date" 
-                                label={Const.PURCHASE_DATE}
-                                defaultValue={getToday()}
-                                onChange={handleCahnge}
-                            />
-                            <TextField type = "text" label={Const.TOTALMONEY} name="totalMoney" onChange={handleCahnge}/>
-                    </label>
-                    </form>
-                    <Button onClick={() => {
-                        onClickeSubmit()
-                    }}>追加</Button>
-                </AccordionDetails>
-            </Accordion>
+            <Grid item xs={12} sm={12} lg={12}>
+                <Accordion>
+                    <AccordionSummary 
+                        expandIcon = {<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                    >   
+                        <strong>追加</strong>
+                    </AccordionSummary>
+                    <Grid container justify="center">
+                        <AccordionDetails>
+                            <Grid container justify="center" spacing={2}>
+                                <Grid item sm={12} xs={12} lg={4}>
+                                    <TextField type="text"
+                                        error={titleCheck}
+                                        helperText={titleCheck? "必須項目です。" : ""}
+                                        label={Const.TITLE} 
+                                        fullWidth name="title" 
+                                        onChange={handleCahnge}
+                                    />
+                                </Grid>
+                                <Grid item sm={12} xs={12} lg={4}>
+                                    <TextField type="date"
+                                        error={dateCheck}
+                                        helperText={dateCheck? "必須項目です。" : ""}
+                                        name="date" 
+                                        label={Const.PURCHASE_DATE}
+                                        fullWidth
+                                        defaultValue={getToday()}
+                                        onChange={handleCahnge}
+                                    />
+                                </Grid>
+                                <Grid item sm={12} xs={12} lg={4}>
+                                    <TextField 
+                                        type= "number"
+                                        error = {totalMoneyCheck}
+                                        helperText={totalMoneyCheck? "必須項目です。" : ""}
+                                        label={Const.TOTALMONEY} 
+                                        fullWidth 
+                                        inputProps={{max:"100000000",step: "100"}}
+                                        name="totalMoney"
+                                        onChange={handleCahnge}
+                                    />
+                                </Grid>
+                            </Grid>
+                        </AccordionDetails>
+                        </Grid>
+                        
+                        <Divider />
+
+                        <Grid container justify="space-around">
+                            <AccordionActions>
+                                <Grid item sm={12} xs={12} lg={12}>
+                                    <Button 
+                                    variant="outlined" 
+                                    color="primary" 
+                                    size="large"
+                                    onClick={() => {
+                                    onClickeSubmit()
+                                    }}>
+                                    追加
+                                    </Button>
+                                </Grid>
+                        </AccordionActions>
+                        </Grid>
+                </Accordion>
+            </Grid>
         </> 
     );
 }
