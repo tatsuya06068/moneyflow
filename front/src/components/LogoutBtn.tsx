@@ -14,7 +14,7 @@ function LogoutButton(props: any) {
     <Grid container justify="center">
       <Button
         variant="outline-primary"
-         style={{width: '56em', height: '3em', textAlign: 'center'}}
+        style={{width: '30em', height: '3em', textAlign: 'center'}}
         onClick={() => {
           logout({ returnTo: window.location.origin });
         }}

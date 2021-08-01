@@ -13,9 +13,16 @@ const App: React.FC = () => {
   const { isLoading } = useAuth0();
   if (isLoading) {
     return (
-      <Grid container justify="center" >
-        <Grid item xs={8}>
-          <CircularProgress />
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: '100vh' }}
+    >
+        <Grid item>
+          <CircularProgress size="9rem" />
         </Grid>
       </Grid>
     );

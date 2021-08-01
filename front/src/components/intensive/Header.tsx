@@ -3,7 +3,7 @@ import '../../layouts/App.sass'
 import {useAuth0} from '@auth0/auth0-react'
 import Login from '../LoginBtn'
 import Logout from '../LogoutBtn'
-import {Grid, Box, AppBar, Tabs, Tab} from '@material-ui/core'
+import {Grid, Box, AppBar, Tabs, Tab, Typography} from '@material-ui/core'
 import { Link } from 'react-router-dom' 
 
 function Header(props: any){
@@ -21,7 +21,7 @@ function Header(props: any){
                 <AppBar title="Money Flow" position="static" style={{backgroundColor: "#00AA00"}}>
                     <Grid container direction="row" justify="center" alignItems="center">
                         <Grid item xs={8}>
-                            <Box height={35}><span>Money Frow</span></Box>
+                            <Box height={35}><h2>Money Frow</h2></Box>
                         </Grid>
                         <Grid item xs={3} sm={3} lg={3}>
                             <Logout />
