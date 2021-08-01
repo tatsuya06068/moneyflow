@@ -5,14 +5,12 @@ import * as Const from '../common/Const'
 import {ResponseBoPIns} from '../stores/slices/BoPSlice'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useDispatch } from 'react-redux'
-import {Input, InputLabel, FormControl ,TextField, Button, Grid, Accordion, AccordionDetails, AccordionSummary, AccordionActions, Divider} from '@material-ui/core'
+import {TextField, Button, Grid, Accordion, AccordionDetails, AccordionSummary, AccordionActions, Divider} from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const AddItem: React.FC = () => {
     
-    const [title, setTitle] = useState("");
-    const [date, setDate] = useState("");
-    const [totalMoney, setTotalMoney]= useState("");
+    
     const [titleCheck, setTitleCheck] = useState(false);
     const [dateCheck, setDateCheck] = useState(false);
     const [totalMoneyCheck, setTotalMoneyCheck] = useState(false);
@@ -44,6 +42,9 @@ const AddItem: React.FC = () => {
         const d = ('00' + dt.getDate()).slice(-2);
         return (y + '-' + m + '-' + d);
     }
+    const [title, setTitle] = useState("");
+    const [date, setDate] = useState(getToday());
+    const [totalMoney, setTotalMoney]= useState("");
 
     const onClickeSubmit = async() =>{
         const accessToken = await getAccessTokenSilently()

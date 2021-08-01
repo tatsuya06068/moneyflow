@@ -20,7 +20,7 @@ const MoneyFlowList : React.FC = () => {
                 <AddItem />
                 {
                     items.length <= 0 ? '登録された収支はありません。' :
-                         items.map(item => (
+                        items.map(item => (
                             <BoPItem key={item.id} bop={item} />
                         ))
                 }
