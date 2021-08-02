@@ -18,10 +18,10 @@ function Header(props: any){
   console.log(value);
     return(
         <div>
-                <AppBar title="Money Flow" position="static" style={{backgroundColor: "#00AA00"}}>
+                <AppBar title="Money Flow" position="static" style={{backgroundColor: "#00AA00", fontSize: '1rem'}}>
                     <Grid container direction="row" justify="center" alignItems="center">
                         <Grid item xs={8}>
-                            <Box height={35}><h2>Money Frow</h2></Box>
+                            <Box height={35}><h1>Money Frow</h1></Box>
                         </Grid>
                         <Grid item xs={3} sm={3} lg={3}>
                             <Logout />

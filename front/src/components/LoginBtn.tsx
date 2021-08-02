@@ -6,8 +6,8 @@ import { Button, Grid } from '@material-ui/core'
 function LoginButton() {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   return !isAuthenticated ? (
-    <Grid container justify="center">
-      <Button variant="contained" color="primary" style={{width: '56em', height: '3em', textAlign: 'center'}} onClick={loginWithRedirect}>Log in</Button>
+    <Grid container justify="center" alignItems="center" >
+      <Button size="large" style={{color: 'white', width: '8em', height: '3em', textAlign: 'center'}} onClick={loginWithRedirect}>Log in</Button>
     </Grid>
       ) : null;
 }
