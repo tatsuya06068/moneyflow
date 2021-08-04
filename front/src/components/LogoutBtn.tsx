@@ -11,10 +11,9 @@ function LogoutButton(props: any) {
   const {user} = useAuth0()
 
     return isAuthenticated ? (
-    <Grid container justify="center">
       <Button
         variant="outline-primary"
-        style={{width: '30em', height: '3em', textAlign: 'center'}}
+        style={{color: 'white', fontSize: '1.2em'}}
         onClick={() => {
           logout({ returnTo: window.location.origin });
         }}
@@ -22,7 +21,6 @@ function LogoutButton(props: any) {
       >
         Log out
       </Button>
-    </Grid>
 
   ) : null;
 }

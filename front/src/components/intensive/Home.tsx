@@ -10,7 +10,7 @@ const imageStyle = {
     backgroundAttachment: 'fixed',
     backgroundSize: 'cover',
     backgroundColor: '#464646',
-    height: "84vh",
+    height: "95vh",
     margin: "-8px"
 
 }
