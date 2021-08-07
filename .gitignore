@@ -1,0 +1,11 @@
+/front/node_modules/
+
+/.vscode/
+
+/api/tmp/
+
+/.eslintcache/
+
+/api/log/
+
+.env

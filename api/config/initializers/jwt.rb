@@ -1,0 +1,1 @@
+require './lib/tasks/json_web_token'
