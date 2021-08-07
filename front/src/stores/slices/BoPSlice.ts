@@ -17,7 +17,7 @@ const bopsAdapter = createEntityAdapter<BoPItem>({
   },
 })
 
-const URL = 'http://localhost:3000'
+const URL = process.env.REACT_APP_API_URL
 
 //BoPList取得
 const GetBoPList = async(accessToken: string)=> {
