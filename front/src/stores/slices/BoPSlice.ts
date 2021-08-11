@@ -21,7 +21,7 @@ const URL = process.env.REACT_APP_API_URL
 
 //BoPList取得
 const GetBoPList = async(accessToken: string)=> {
-    return axios.get<BoPState>( URL + '/balance_of_payments', { headers: {
+    return axios.get<BoPState>( URL + 'balance_of_payments', { headers: {
         Authorization: "Bearer " + accessToken
         }, 
     })
@@ -29,7 +29,7 @@ const GetBoPList = async(accessToken: string)=> {
 
 //BoP登録
 const InsBoP = async(accessToken: string, title: string , date: string, totalMoney: string) => {
-        return axios.post<BoPItem>( URL + '/balance_of_payments', {  
+        return axios.post<BoPItem>( URL + 'balance_of_payments', {  
                 balanceofpayment: {
                     title: title,
                     date: date,
@@ -45,7 +45,7 @@ const InsBoP = async(accessToken: string, title: string , date: string, totalMon
 
 //BoP更新
 const UpdateBoP = async(accessToken: string, id: number, title: string , date: string, totalMoney: number) => {
-    return axios.put<BoPItem>(URL + '/balance_of_payments/' + id, {
+    return axios.put<BoPItem>(URL + 'balance_of_payments/' + id, {
             balanceofpayment: {
                 id: id,
                 title: title,
@@ -62,7 +62,7 @@ const UpdateBoP = async(accessToken: string, id: number, title: string , date: s
 
 //削除
 const DelBoP = async(accessToken: string , id: number) => {
-    return axios.delete<BoPItem>(URL + '/balance_of_payments/' + id, {
+    return axios.delete<BoPItem>(URL + 'balance_of_payments/' + id, {
         headers: {
            Authorization: "Bearer " + accessToken
         },
