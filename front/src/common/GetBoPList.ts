@@ -4,18 +4,19 @@ import { useDispatch } from 'react-redux'
 import { useEffect } from 'react';
 
 const GetBoPList = () => {
-    const {getAccessTokenSilently} = useAuth0();
-    const dispatch = useDispatch();
-    useEffect(
-      () => {
-    
-    async function getBoPList() {
+  useEffect(
+    () => {
+      const {getAccessTokenSilently} = useAuth0();
+      const dispatch = useDispatch();
+  
+      async function getBoPList() {
         await getAccessTokenSilently()
         .then((accessToken) => {
-      dispatch(ResponseBoPList({accessToken}))
-      })
+          dispatch(ResponseBoPList({accessToken}))
+        })
+      }
+      getBoPList();
+    }, []);
 }
-getBoPList();
-      }, []);
-}
+
 export default GetBoPList;

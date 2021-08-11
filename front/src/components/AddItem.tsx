@@ -48,7 +48,7 @@ const AddItem: React.FC = () => {
 
     const onClickeSubmit = async() =>{
         const accessToken = await getAccessTokenSilently()
-        if (title.length == 0) {
+        if (title.length === 0) {
             setTitleCheck(true);
             return
         }
@@ -56,14 +56,14 @@ const AddItem: React.FC = () => {
             setTitleCheck(false);
         }
 
-        if (date.length == 0) {
+        if (date.length === 0) {
             setDateCheck(true);
             return
         }else if(dateCheck){
             setDateCheck(false)
         }
 
-        if (totalMoney.length == 0) {
+        if (totalMoney.length === 0) {
             setTotalMoneyCheck(true);
             return
         }else if(totalMoneyCheck){

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, createEntityAdapter, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit'
 import axios from 'axios'
 import {RootState} from '../../rootReducer'
 import { BoPItem, BoPState } from '../../models/BoPModel'

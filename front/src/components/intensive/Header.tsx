@@ -4,15 +4,14 @@ import '../../layouts/App.sass'
 import {useAuth0} from '@auth0/auth0-react'
 import Login from '../LoginBtn'
 import Logout from '../LogoutBtn'
-import {Grid, Box, AppBar, Tabs, Tab, Typography} from '@material-ui/core'
+import {Grid, AppBar, Tabs, Tab } from '@material-ui/core'
 import { Link } from 'react-router-dom' 
 
 function Header(props: any){
-    const {user} = useAuth0();
     const location = useLocation()
 
     const getPath = () => {
-        return location.pathname == "/"  ? 0 : 1 
+        return location.pathname === "/"  ? 0 : 1 
     }
 
     const [value, setValue] = useState(getPath());
