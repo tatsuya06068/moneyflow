@@ -1,13 +1,12 @@
 import React from 'react'
-import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom"
+import { Route, BrowserRouter as Router, Switch} from "react-router-dom"
 import './layouts/App.sass'
 import Header from './components/intensive/Header'
 import Home from './components/intensive/Home'
 import List from './components/intensive/MoneyFlowList'
 import { ProtectedRoute } from "./routers/ProtectedRoute"
-import ReactDOM from "react-dom"
 import { useAuth0 } from "@auth0/auth0-react"
-import {CircularProgress, Grid, GridSpacing} from '@material-ui/core'
+import {CircularProgress, Grid} from '@material-ui/core'
 
 const App: React.FC = () => {
   const { isLoading } = useAuth0();

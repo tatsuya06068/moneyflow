@@ -1,9 +1,8 @@
 import React from 'react'
-import { useDispatch, useSelector} from 'react-redux'
-import * as Const from '../common/Const'
-import { selectBoPList, ResponseBoPDelete, ResponseBoPUpdate } from '../stores/slices/BoPSlice'
+import { useDispatch} from 'react-redux'
+import { ResponseBoPDelete, ResponseBoPUpdate } from '../stores/slices/BoPSlice'
 import {useAuth0} from '@auth0/auth0-react'
-import {Button, Grid, Paper, Theme, makeStyles, createStyles} from '@material-ui/core'
+import {Button, Grid, Theme, makeStyles, createStyles} from '@material-ui/core'
 import {BoPItem as BoPModel} from '../models/BoPModel'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List';
@@ -76,7 +75,7 @@ const BoPItem : React.FC<Props> = ({ bop }) => {
 
     const UpdateBoP = (id: number) => {
 
-        if (title.length == 0) {
+        if (title.length === 0) {
             setTitleCheck(true);
             return
         }
@@ -84,14 +83,14 @@ const BoPItem : React.FC<Props> = ({ bop }) => {
             setTitleCheck(false);
         }
 
-        if (date.length == 0) {
+        if (date.length === 0) {
             setDateCheck(true);
             return
         }else if(dateCheck){
             setDateCheck(false)
         }
 
-        if (totalMoney == 0) {
+        if (totalMoney === 0) {
             setTotalMoneyCheck(true);
             return
         }else if(totalMoneyCheck){
