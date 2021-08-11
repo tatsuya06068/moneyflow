@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {useLocation} from 'react-router'
 import '../../layouts/App.sass'
-import {useAuth0} from '@auth0/auth0-react'
 import Login from '../LoginBtn'
 import Logout from '../LogoutBtn'
 import {Grid, AppBar, Tabs, Tab } from '@material-ui/core'
