@@ -8,4 +8,5 @@
 
 /api/log/
 
-.env
+.env/
+/front/build/

@@ -30,7 +30,16 @@ services:
       - ./front:/moneyflow
     depends_on:
       - api
-
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - 8080:80
+    volumes:
+      - ./front/build:/var/www
+      - ./containers/nginx/:/etc/nginx/conf.d/
+    depends_on:
+      - front
 volumes:
   mysql-data:
   gem_data:
