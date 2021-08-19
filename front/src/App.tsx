@@ -31,7 +31,7 @@ const App: React.FC = () => {
       
       <Grid container spacing={2}>
         <Router>
-          <Grid container direction="column">
+          <Grid container >
             <Grid item sm={12} xs={12} lg={12}>
                 <Header />
               </Grid>

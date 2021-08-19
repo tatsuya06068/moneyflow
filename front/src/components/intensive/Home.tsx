@@ -7,7 +7,6 @@ const imageStyle = {
     backgroundImage: `url(${homeimage})`,
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'fixed',
     backgroundSize: 'cover',
     backgroundColor: '#464646',
     height: "95vh",
@@ -25,16 +24,18 @@ const fontStyle = {
 
 function Home( ){
     return(
+        <>
+        <Grid container>
+        <Grid item xs={12} sm={12} lg={12}>
         <div style={imageStyle} >
             <Grid
                 container
                 spacing={0}
-                direction="column"
                 alignItems="center"
                 justify="center"
                 style={{ minHeight: '100%'}}
             >  
-                <Grid container justify="flex-start" style={{width:'70%'}}>  
+                <Grid container justify="flex-start" style={{width:'80%'}}>  
                     <Grid item sm={12} xs={12} lg={12}>
                        <span style={fontStyle}>
                             MONEY
@@ -48,6 +49,9 @@ function Home( ){
                 </Grid>
             </Grid>
         </div>
+        </Grid>
+        </Grid>
+        </>
     )
 }
 export default Home;

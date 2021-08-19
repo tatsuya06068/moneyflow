@@ -26,11 +26,11 @@ function Header(props: any){
                     <Grid item xs = {12} sm={12} lg={12}>
                         <Grid container justify="center" alignItems="center">
                             <Grid item xs={7} sm={8} lg={9}>
-                                <h1>
+                                <h2>
                                         Money Frow
-                                </h1>
+                                </h2>
                             </Grid>
-                            <Grid item xs={1} sm={3} lg={1} style={{marginTop: '1em'}}>
+                            <Grid item xs={4} sm={3} lg={1} style={{marginTop: '0.4em'}}>
                                 <Logout />
                                 <Login />
                             </Grid>
