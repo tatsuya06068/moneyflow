@@ -3,8 +3,4 @@ Rails.application.routes.draw do
  
   resources :balance_of_payments
  
-        
-  get 'api/public' => 'public#public'
-  get 'api/private' => 'private#private'
-  get 'api/private-scoped' => 'private#private_scoped'
 end

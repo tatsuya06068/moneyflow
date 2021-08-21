@@ -52,7 +52,6 @@ const BoPItem : React.FC<Props> = ({ bop }) => {
         switch (event.target.name){
             case 'edit_title' :
                 setTitle(event.target.value)
-                console.log(title)
                 break
             case 'edit_date' :
                 setDate(event.target.value)
